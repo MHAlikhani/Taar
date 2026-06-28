@@ -1,0 +1,40 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "es2022": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "script"
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "no-console": "off",
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "prefer-const": "error"
+  },
+  "overrides": [
+    {
+      "files": ["src/mainview/js/ipc.js", "src/bun/index.js"],
+      "parserOptions": { "sourceType": "module" },
+      "env": { "browser": true }
+    },
+    {
+      "files": ["src/renderer/**/*.js", "src/mainview/**/*.js"],
+      "env": { "browser": true },
+      "globals": {
+        "electronAPI": "readonly",
+        "IpcService": "readonly",
+        "Logger": "readonly",
+        "Stats": "readonly",
+        "Controls": "readonly"
+      }
+    },
+    {
+      "files": ["tests/**/*.js"],
+      "env": { "jest": true }
+    }
+  ]
+}

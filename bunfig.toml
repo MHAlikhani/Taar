@@ -1,0 +1,9 @@
+# Bun-first configuration (https://bun.sh/docs/runtime/bunfig)
+[install]
+exact = true
+
+[telemetry]
+enabled = false
+
+[test]
+coverage = false
