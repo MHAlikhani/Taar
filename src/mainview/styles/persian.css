@@ -1,0 +1,101 @@
+/* ================================================================
+   PERSIAN.CSS — Persian-inspired patterns, gradients, ornaments
+   ================================================================ */
+
+.persian-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.pattern-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Animated shimmer overlay */
+.persian-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(212, 175, 55, 0.10), transparent 55%),
+    radial-gradient(ellipse at 80% 90%, rgba(30, 58, 138, 0.15), transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(153, 27, 27, 0.06), transparent 70%);
+  animation: shimmerFloat 28s ease-in-out infinite;
+}
+
+@keyframes shimmerFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(-20px, -15px) scale(1.04); }
+  66%      { transform: translate(15px, 10px) scale(0.98); }
+}
+
+/* Arabesque border ornament (reusable via mask) */
+.ornament-border {
+  position: relative;
+}
+
+.ornament-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg,
+    var(--c-gold) 0%,
+    transparent 25%,
+    transparent 50%,
+    var(--c-gold) 75%,
+    transparent 100%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Persian gold text gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--c-gold), var(--c-gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Decorative corner flourish (for cards) */
+.flourish-corner {
+  position: relative;
+}
+.flourish-corner::after {
+  content: '❋';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  color: var(--c-gold);
+  font-size: 18px;
+  opacity: 0.4;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+  pointer-events: none;
+}
+
+/* Card top gold line (Persian tile strip) */
+.tile-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--c-gold-dark) 20%,
+    var(--c-gold) 50%,
+    var(--c-gold-light) 80%,
+    transparent 100%);
+  opacity: 0.6;
+}
