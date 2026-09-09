@@ -89,3 +89,16 @@ describe('BotProcessManager — browser close & relaunch recovery', () => {
     expect(() => manager._handleMessage({ type: 'unknown-type' })).not.toThrow();
   });
 });
+
+
+describe('BotProcessManager — bot entrypoint resolution', () => {
+  test('resolves the bot entry to an existing file', () => {
+    const path = require('path');
+    const fs = require('fs');
+    const managerPath = require.resolve('../../src/runtime/botProcessManager');
+    const runtimeDir = path.dirname(managerPath);
+    const scriptPath = path.join(runtimeDir, '..', 'bot', 'index.js');
+    expect(fs.existsSync(scriptPath)).toBe(true);
+    expect(scriptPath.replace(/\\/g, '/')).toMatch(/src\/bot\/index\.js$/);
+  });
+});

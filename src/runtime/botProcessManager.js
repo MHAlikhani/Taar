@@ -32,7 +32,7 @@ class BotProcessManager {
 
   start() {
     return new Promise((resolve, reject) => {
-      const scriptPath = path.join(__dirname, '..', '..', 'bot', 'index.js');
+      const scriptPath = path.join(__dirname, '..', 'bot', 'index.js');
 
       const bunPath = process.env.BOT_RUNTIME === 'node' ? null : resolveBunPath();
       let exePath;
