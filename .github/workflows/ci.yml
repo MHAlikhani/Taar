@@ -56,7 +56,7 @@ jobs:
           key: hutch-${{ runner.os }}-${{ hashFiles('package.json') }}
 
       - name: Production build
-        run: bunx electrobun build --env=production
+        run: bunx electrobun build --env=stable
 
       - name: Upload build
         uses: actions/upload-artifact@v4

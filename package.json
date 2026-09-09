@@ -27,7 +27,7 @@
   "scripts": {
     "start": "bunx electrobun dev",
     "build": "bunx electrobun build",
-    "build:prod": "bunx electrobun build --env=production",
+    "build:prod": "bunx electrobun build --env=stable",
     "test": "bun test",
     "test:watch": "bun test --watch",
     "test:coverage": "bun test --coverage",

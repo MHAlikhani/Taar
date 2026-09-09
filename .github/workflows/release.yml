@@ -36,13 +36,13 @@ jobs:
         run: bun test
 
       - name: Production build
-        run: bunx electrobun build --env=production
+        run: bunx electrobun build --env=stable
 
       - name: Collect artifacts
         shell: bash
         run: |
           mkdir -p release
-          find artifacts -type f \( -name '*.exe' -o -name '*.dmg' -o -name '*.deb' -o -name '*.AppImage' -o -name '*.zip' \) -exec cp {} release/ \;
+          find artifacts -type f \( -name '*.exe' -o -name '*.dmg' -o -name '*.deb' -o -name '*.AppImage' -o -name '*.zip' -o -name '*.tar.zst' -o -name 'update.json' \) -exec cp {} release/ \;
           ls -la release/
 
       - name: Create GitHub Release
