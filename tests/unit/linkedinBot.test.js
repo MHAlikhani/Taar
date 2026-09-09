@@ -187,3 +187,66 @@ describe('DecisionEngine — adaptive pacing', () => {
     expect(engine.successRate()).toBeNull();
   });
 });
+
+
+describe('LinkedInBot — active browser probe (pipe-death detection)', () => {
+  let bot;
+  let captured;
+
+  beforeEach(() => {
+    bot = new LinkedInBot();
+    captured = captureProcessSend();
+  });
+
+  afterEach(() => {
+    captured.restore();
+    if (bot._exitTimer) clearTimeout(bot._exitTimer);
+  });
+
+  test('probe detects a dead pipe (version rejects) and triggers recovery', async () => {
+    bot.browser = {
+      isConnected: () => true,
+      version: () => Promise.reject(new Error('pipe dead'))
+    };
+
+    await bot._probeBrowser(50);
+
+    expect(captured.calls.some((m) => m.type === 'browser-closed')).toBe(true);
+    expect(bot.browser).toBeNull();
+  });
+
+  test('probe detects a hung pipe (version never settles) via timeout', async () => {
+    bot.browser = {
+      isConnected: () => true,
+      version: () => new Promise(() => {})
+    };
+
+    await bot._probeBrowser(50);
+
+    expect(captured.calls.some((m) => m.type === 'browser-closed')).toBe(true);
+  });
+
+  test('probe stays quiet on a healthy browser', async () => {
+    bot.browser = {
+      isConnected: () => true,
+      version: () => Promise.resolve('124.0')
+    };
+
+    await bot._probeBrowser(50);
+
+    expect(captured.calls.some((m) => m.type === 'browser-closed')).toBe(false);
+    expect(bot.browser).not.toBeNull();
+  });
+
+  test('probe skips when an intentional close is in progress', async () => {
+    bot._intentionalClose = true;
+    bot.browser = {
+      isConnected: () => false,
+      version: () => Promise.reject(new Error('closed'))
+    };
+
+    await bot._probeBrowser(50);
+
+    expect(captured.calls.some((m) => m.type === 'browser-closed')).toBe(false);
+  });
+});

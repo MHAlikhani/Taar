@@ -12,7 +12,10 @@ async function shutdown(signal = 'stop') {
   shuttingDown = true;
   console.log(`[bot] shutdown requested (${signal})`);
   try {
-    await bot.stop();
+    await Promise.race([
+      bot.stop(),
+      new Promise((resolve) => setTimeout(resolve, 8000))
+    ]);
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('[bot] shutdown error:', err.message);

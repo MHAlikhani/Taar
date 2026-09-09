@@ -53,12 +53,26 @@ class LinkedInBot {
 
   _watchForBrowserClose() {
     this.browser.on('disconnected', () => this._handleBrowserGone());
-    this._browserWatchdog = setInterval(() => {
-      try {
-        if (this.browser && !this.browser.isConnected()) this._handleBrowserGone();
-      } catch {}
-    }, 3000);
+    this._browserWatchdog = setInterval(() => this._probeBrowser(), 3000);
     this._browserWatchdog.unref?.();
+  }
+
+  async _probeBrowser(timeoutMs = 5000) {
+    if (!this.browser || this._intentionalClose || this._probing) return;
+    this._probing = true;
+    try {
+      // Active roundtrip — passive checks (isConnected / disconnected event)
+      // miss the close when the CDP pipe dies without a clean close frame
+      // (observed under the Bun runtime).
+      await Promise.race([
+        this.browser.version(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('probe timeout')), timeoutMs))
+      ]);
+    } catch {
+      this._handleBrowserGone();
+    } finally {
+      this._probing = false;
+    }
   }
 
   _handleBrowserGone() {
@@ -225,8 +239,12 @@ class LinkedInBot {
       });
       await sleep(1500);
       return true;
-    } catch {
-      this.logger.warn('⚠️ Login wait timeout (10 minutes).');
+    } catch (err) {
+      if (this.browser && !this.browser.isConnected()) {
+        this.logger.warn('🔴 Browser was closed while waiting for login.');
+      } else {
+        this.logger.warn('⚠️ Login wait timeout (10 minutes).');
+      }
       return false;
     }
   }
@@ -383,6 +401,7 @@ class LinkedInBot {
     this.isStopping = true;
     this.isRunning = false;
     this._intentionalClose = true;
+    this._browserGoneHandled = true;
     if (this._browserWatchdog) {
       clearInterval(this._browserWatchdog);
       this._browserWatchdog = null;
