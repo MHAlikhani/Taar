@@ -82,7 +82,7 @@ const ok = (data = {}) => ({ success: true, ...data });
 const fail = (error) => ({ success: false, error: String(error?.message || error) });
 
 mainWindow = new BrowserWindow({
-  title: 'LinkedIn Assistant',
+  title: 'Taar — LinkedIn Networking Assistant',
   url: 'views://mainview/index.html',
   rpc
 });

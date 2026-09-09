@@ -1,7 +1,7 @@
 {
-  "name": "linkedin-assistant",
+  "name": "taar",
   "version": "1.0.0",
-  "description": "Enterprise-grade LinkedIn automation platform with adaptive selectors, human-like behavior simulation, and Persian-inspired design.",
+  "description": "Taar — human-like LinkedIn networking assistant with adaptive selectors, behavior personas, and a Persian-inspired UI. Built on Bun and Electrobun.",
   "main": "src/main/index.js",
   "author": {
     "name": "Mohammad Hossein Alikhani",

@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🚀 Electrobun Era — "Bun-First" Release
 
+#### Renamed
+- **The app is now Taar (تار)** — the warp threads of a Persian carpet; the hidden weave that connects everything
+
 #### Changed
 - **Desktop shell migrated from Electron to Electrobun 2.0** — main process runs on Bun; typed RPC replaces contextBridge IPC (`src/bun/`, `src/schemas/`, `src/mainview/`). Electron shell kept as legacy fallback (`npm run start:electron`)
 - **Version unified to 1.0.0** across app, docs and packaging

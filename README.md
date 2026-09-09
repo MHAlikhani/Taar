@@ -1,8 +1,8 @@
 <div align="center">
 
-# LinkedIn Assistant
+# Taar · تار
 
-**Smart, human-like LinkedIn networking automation — built on Bun & Electrobun**
+**Weave your network.** Smart, human-like LinkedIn networking automation — built on Bun & Electrobun.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-D4AF37?style=for-the-badge&labelColor=0F0F1E)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-1E3A8A?style=for-the-badge&labelColor=0F0F1E)
@@ -17,7 +17,7 @@
 
 ---
 
-**LinkedIn Assistant** is a lightweight desktop app that opens an isolated browser, sends connection requests to people-search results on your behalf, and behaves like a careful human while doing it — randomized delays, per-session behavior personas, exponential cooldown when something goes wrong, and a selector engine that learns what works on LinkedIn's changing DOM.
+**Taar** (Persian: *the warp threads of a carpet*) is a lightweight desktop app that opens an isolated browser, sends connection requests to people-search results on your behalf, and behaves like a careful human while doing it — randomized delays, per-session behavior personas, exponential cooldown when something goes wrong, and a selector engine that learns what works on LinkedIn's changing DOM.
 
 Built on **Bun** and **[Electrobun](https://electrobun.dev)** instead of Electron: smaller footprint, faster startup, one runtime end to end.
 

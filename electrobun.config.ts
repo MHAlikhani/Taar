@@ -2,8 +2,8 @@
 // Docs: https://framework.blackboard.sh/electrobun/guides/quick-start/
 export default {
   app: {
-    name: 'LinkedIn Assistant',
-    identifier: 'com.mhalikhani.linkedin-assistant',
+    name: 'Taar',
+    identifier: 'com.mhalikhani.taar',
     version: '1.0.0'
   },
   build: {
