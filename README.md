@@ -8,7 +8,7 @@
 ![Bun](https://img.shields.io/badge/bun-1.1%2B-F472B6?style=for-the-badge&labelColor=0F0F1E)
 ![Electrobun](https://img.shields.io/badge/electrobun-2.0-F7DF1E?style=for-the-badge&labelColor=0F0F1E)
 ![Tests](https://img.shields.io/badge/tests-81%20passing-16A34A?style=for-the-badge&labelColor=0F0F1E)
-![License](https://img.shields.io/badge/license-MIT-991B1B?style=for-the-badge&labelColor=0F0F1E)
+![License](https://img.shields.io/badge/license-Taar%20Community%201.0-991B1B?style=for-the-badge&labelColor=0F0F1E)
 
 [Features](#-features) · [Quick Start](#-quick-start) · [How It Works](#-how-it-works) · [FAQ](#-faq) · [Contributing](#-contributing)
 
@@ -156,7 +156,19 @@ Issues and PRs are welcome. Keep PRs focused; run `bun test` and `bun run lint` 
 
 ## 📄 License
 
-[MIT](LICENSE) — © Mohammad Hossein Alikhani
+Taar Community License 1.0 — © Mohammad Hossein Alikhani
+
+| You can… | For free? |
+|---|---|
+| Use Taar for your own personal networking | ✅ Yes, unlimited |
+| Study and modify the code for personal use | ✅ Yes |
+| Contribute pull requests to the official repo | ✅ Yes (and welcome!) |
+| Share verbatim copies pointing to this repo | ✅ Yes |
+| Commercial / industrial / employer use | 💰 Needs a paid license |
+| Re-publish under a different name or rebrand | 💰 Needs a paid license |
+| Embed Taar's code in another product | 💰 Needs a paid license |
+
+Commercial licensing: **mohammad.hosein.alikhani08@gmail.com** — see [LICENSE](LICENSE).
 
 ---
 

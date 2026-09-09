@@ -1,21 +1,78 @@
-MIT License
+TAAR COMMUNITY LICENSE
+Version 1.0.0 — September 2026
 
-Copyright (c) 2026 Mohammad Hossein Alikhani
+Copyright (c) 2026 Mohammad Hossein Alikhani.
+All rights not explicitly granted below are reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Contact for commercial licensing: mohammad.hosein.alikhani08@gmail.com
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. DEFINITIONS
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+   "Taar" means this software, its source code, build artifacts,
+   documentation, and design assets, in the official repository
+   published by the Copyright Holder.
+
+   "Personal Use" means using Taar on your own LinkedIn account for
+   your own individual networking, on hardware you own or control,
+   without charging anyone for that use.
+
+   "Commercial Use" means any use that is not Personal Use, including
+   but not limited to: industrial or business-scale operation, use on
+   behalf of an employer or client, selling, renting, sublicensing,
+   offering Taar as a service, or bundling it into a paid product.
+
+2. WHAT YOU MAY DO FREE OF CHARGE
+
+   a) Personal Use of Taar, without limitation on the number of
+      machines, as long as no fee is charged to anyone for that use.
+
+   b) Study, inspect, and modify the source code for your own
+      Personal Use.
+
+   c) Contribute improvements, fixes, and features to the official
+      Taar repository via pull requests. By submitting a contribution
+      you grant the Copyright Holder a perpetual, worldwide,
+      royalty-free right to use, modify, and redistribute it as part
+      of Taar under this or any future license the Copyright Holder
+      chooses.
+
+   d) Share verbatim, unmodified copies of the official repository
+      with others, free of charge, pointing them to the official
+      source.
+
+3. WHAT REQUIRES A PAID, WRITTEN LICENSE
+
+   You must obtain a written commercial license (or written
+   permission) from the Copyright Holder before doing any of the
+   following:
+
+   a) Any Commercial Use as defined in section 1.
+
+   b) Redistributing, republishing, or re-releasing Taar — in whole
+      or in substantial part — under a different name, brand, or
+      identity, or removing/replacing its branding, attribution, or
+      license notices.
+
+   c) Distributing modified versions to third parties outside of a
+      pull request to the official repository.
+
+   d) Using Taar's source code, algorithms, or design assets inside
+      another product, whether free or paid.
+
+4. ATTRIBUTION
+
+   Any permitted redistribution must keep this license, the name
+   "Taar", and the copyright notice intact.
+
+5. NO WARRANTY
+
+   TAAR IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+   PURPOSE. THE COPYRIGHT HOLDER IS NOT LIABLE FOR ANY DAMAGES,
+   ACCOUNT RESTRICTIONS, OR LOSSES ARISING FROM USE OF TAAR.
+
+6. TERMINATION
+
+   Violating sections 2 or 3 terminates this license immediately.
+   Contributions you already submitted remain licensed to the
+   Copyright Holder under section 2c.
