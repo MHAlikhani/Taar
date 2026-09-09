@@ -1,0 +1,47 @@
+{
+  "name": "linkedin-assistant",
+  "version": "1.0.0",
+  "description": "Enterprise-grade LinkedIn automation platform with adaptive selectors, human-like behavior simulation, and Persian-inspired design.",
+  "main": "src/main/index.js",
+  "author": {
+    "name": "Mohammad Hossein Alikhani",
+    "email": "mohammad.hosein.alikhani08@gmail.com",
+    "url": "https://github.com/MHAlikhani"
+  },
+  "homepage": "https://github.com/MHAlikhani/LinkedIn-Assistant-main",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MHAlikhani/LinkedIn-Assistant-main.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "linkedin",
+    "automation",
+    "electron",
+    "playwright",
+    "productivity"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "bunx electrobun dev",
+    "build": "bunx electrobun build",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "test:coverage": "bun test --coverage",
+    "test:unit": "bun test tests/unit",
+    "test:integration": "bun test tests/integration",
+    "lint": "eslint src tests",
+    "clean": "bun -e \"const fs=require('node:fs');for(const p of ['reports','data/session.json','data/selector-memory.json'])fs.rmSync(p,{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  },
+  "devDependencies": {
+    "electrobun": "2.0.1",
+    "eslint": "^8.57.0"
+  }
+}

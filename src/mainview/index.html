@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
+  <title>LinkedIn Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/persian.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/animations.css">
+</head>
+<body>
+  <!-- Persian-inspired background pattern -->
+  <div class="persian-bg" aria-hidden="true">
+    <svg class="pattern-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="boteh" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+          <path d="M50 15 Q62 25 58 42 Q54 60 50 60 Q46 60 42 42 Q38 25 50 15 Z"
+                fill="none" stroke="rgba(212, 175, 55, 0.06)" stroke-width="0.8"/>
+          <circle cx="50" cy="32" r="2.5" fill="rgba(212, 175, 55, 0.08)"/>
+          <path d="M50 60 Q50 75 48 80 M50 60 Q50 75 52 80"
+                stroke="rgba(212, 175, 55, 0.06)" stroke-width="0.8" fill="none"/>
+        </pattern>
+        <pattern id="termeh" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+          <path d="M40 5 L50 20 L40 35 L30 20 Z"
+                fill="none" stroke="rgba(153, 27, 27, 0.05)" stroke-width="0.5"/>
+          <path d="M15 40 L25 50 L15 60 L5 50 Z"
+                fill="none" stroke="rgba(30, 58, 138, 0.05)" stroke-width="0.5"/>
+          <path d="M65 40 L75 50 L65 60 L55 50 Z"
+                fill="none" stroke="rgba(30, 58, 138, 0.05)" stroke-width="0.5"/>
+        </pattern>
+        <radialGradient id="glow" cx="50%" cy="50%" r="60%">
+          <stop offset="0%" stop-color="rgba(212, 175, 55, 0.12)"/>
+          <stop offset="100%" stop-color="rgba(212, 175, 55, 0)"/>
+        </radialGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#boteh)"/>
+      <rect width="100%" height="100%" fill="url(#termeh)"/>
+      <rect width="100%" height="100%" fill="url(#glow)"/>
+    </svg>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-section">
+        <div class="logo-icon" aria-hidden="true">
+          <div class="logo-ring"></div>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"
+                  stroke="url(#goldGrad)" stroke-width="1.8"/>
+            <path d="M8 17V10M8 7.01V7M12 17V13a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4"
+                  stroke="url(#goldGrad)" stroke-width="1.8" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="goldGrad" x1="3" y1="3" x2="21" y2="21">
+                <stop stop-color="#D4AF37"/>
+                <stop offset="1" stop-color="#F4C430"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>LinkedIn Assistant</h1>
+          <p class="logo-subtitle">Persian Edition · Intelligent Automation</p>
+        </div>
+      </div>
+      <div class="status-badge" id="statusBadge" role="status" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="status-text">Ready</span>
+      </div>
+      <button id="guideBtn" class="btn-ghost guide-btn" type="button" title="Open guide">Guide</button>
+    </header>
+
+    <!-- Main -->
+    <main class="app-main">
+      <!-- Control Panel -->
+      <section class="control-panel" aria-label="Controls">
+        <!-- Browser Control -->
+        <article class="panel-card">
+          <div class="card-header">
+            <span class="card-icon" aria-hidden="true">◈</span>
+            <h2>Browser Control</h2>
+          </div>
+          <button id="launchBtn" class="btn btn-primary" type="button">
+            <span class="btn-icon" aria-hidden="true">▶</span>
+            <span class="btn-label">Launch Browser</span>
+          </button>
+          <p class="help-text">Opens an isolated Chrome window. Log in to LinkedIn once — your session is saved.</p>
+        </article>
+
+        <!-- Automation Settings -->
+        <article class="panel-card">
+          <div class="card-header">
+            <span class="card-icon" aria-hidden="true">❋</span>
+            <h2>Automation Settings</h2>
+          </div>
+          <div class="form-group">
+            <label for="maxRequests">Max requests per session</label>
+            <input type="number" id="maxRequests" value="30" min="1" max="100" inputmode="numeric">
+            <small class="help-text">Recommended: 20-30 for free accounts, up to 100 for Premium.</small>
+          </div>
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="addNote">
+              <span class="checkbox-custom" aria-hidden="true"></span>
+              <span>Include personalized note</span>
+            </label>
+          </div>
+          <div class="form-group" id="noteGroup" hidden>
+            <label for="noteText">Note (max 200 characters)</label>
+            <textarea id="noteText" rows="4" maxlength="200"
+                      placeholder="e.g. We connected through a shared interest in..."></textarea>
+            <div class="char-counter">
+              <span id="charCount">0</span> / 200
+            </div>
+          </div>
+        </article>
+
+        <!-- Automation Control -->
+        <article class="panel-card">
+          <div class="card-header">
+            <span class="card-icon" aria-hidden="true">✦</span>
+            <h2>Automation Control</h2>
+          </div>
+          <div class="button-group">
+            <button id="startBtn" class="btn btn-success" type="button" disabled>
+              <span class="btn-icon" aria-hidden="true">▶</span>
+              <span class="btn-label">Start</span>
+            </button>
+            <button id="stopBtn" class="btn btn-danger" type="button" disabled>
+              <span class="btn-icon" aria-hidden="true">■</span>
+              <span class="btn-label">Stop</span>
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <!-- Stats + Log -->
+      <section class="stats-log-panel" aria-label="Stats and Activity">
+        <!-- Stats -->
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-icon stat-sent" aria-hidden="true">✓</div>
+            <div class="stat-body">
+              <div class="stat-value" id="sentCount" aria-live="polite">0</div>
+              <div class="stat-label">Sent</div>
+            </div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon stat-skipped" aria-hidden="true">⊘</div>
+            <div class="stat-body">
+              <div class="stat-value" id="skippedCount" aria-live="polite">0</div>
+              <div class="stat-label">Skipped</div>
+            </div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon stat-errors" aria-hidden="true">!</div>
+            <div class="stat-body">
+              <div class="stat-value" id="errorCount" aria-live="polite">0</div>
+              <div class="stat-label">Errors</div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Log -->
+        <article class="log-panel">
+          <div class="card-header log-header">
+            <span class="card-icon" aria-hidden="true">❦</span>
+            <h2>Live Activity Log</h2>
+            <button id="clearLogBtn" class="btn-ghost" type="button">Clear</button>
+          </div>
+          <div id="logContainer" class="log-container" role="log" aria-live="off"></div>
+        </article>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <div class="developer-info">
+          <p class="dev-label">Developed by</p>
+          <p class="dev-name">Mohammad Hossein Alikhani</p>
+          <div class="social-links">
+            <a href="mailto:mohammad.hosein.alikhani08@gmail.com" class="social-link" title="Email">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              <span>Email</span>
+            </a>
+            <a href="https://github.com/MHAlikhani" target="_blank" rel="noopener" class="social-link" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.4 3.6 1 .1-.8.4-1.4.8-1.7-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+          </div>
+        </div>
+        <div class="version-info">
+          <span class="version-badge">v1.0.0</span>
+          <span class="separator" aria-hidden="true">◆</span>
+          <span>Persian Edition</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+
+  <!-- In-app guide -->
+  <dialog id="guideDialog" class="guide-dialog" aria-labelledby="guideTitle">
+    <div class="guide-header">
+      <span class="card-icon" aria-hidden="true">&#10088;</span>
+      <h2 id="guideTitle">User Guide</h2>
+      <button id="guideCloseBtn" class="btn-ghost" type="button" aria-label="Close">&#10005;</button>
+    </div>
+    <ol class="guide-steps">
+      <li><strong>Launch the browser</strong> &mdash; click &ldquo;Launch Browser&rdquo;. An isolated Chrome window opens and your session is saved (log in once).</li>
+      <li><strong>Sign in to LinkedIn</strong> &mdash; in the browser window, log in, then go to
+        <code>linkedin.com/search/results/people</code> (People Search).</li>
+      <li><strong>Configure</strong> &mdash; set how many requests to send (20&ndash;30 recommended for free accounts) and optionally write a personalized note.</li>
+      <li><strong>Start</strong> &mdash; press &ldquo;Start&rdquo;. The bot skips pending invitations automatically, paces itself like a human, and cools down when errors pile up.</li>
+    </ol>
+    <div class="guide-tips">
+      <p>Tips: if the browser window is closed, just press &ldquo;Launch Browser&rdquo; again &mdash; recovery is automatic. Your session is saved after every 5 invitations. Use &ldquo;Stop&rdquo; for a graceful stop.</p>
+      <p>Smart pacing: after repeated errors the bot slows down on its own to keep your account safe.</p>
+    </div>
+  </dialog>
+
+  <script type="module" src="index.js"></script>
+  <script type="module" src="js/logger.js"></script>
+  <script type="module" src="js/stats.js"></script>
+  <script type="module" src="js/controls.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

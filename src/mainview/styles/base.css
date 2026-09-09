@@ -1,0 +1,149 @@
+/* ================================================================
+   BASE.CSS — Reset, typography, layout primitives
+   ================================================================ */
+
+:root {
+  /* Persian-inspired palette */
+  --c-gold: #D4AF37;
+  --c-gold-light: #F4C430;
+  --c-gold-dark: #A8871F;
+  --c-persian-blue: #1E3A8A;
+  --c-persian-blue-light: #3B5BDB;
+  --c-persian-red: #991B1B;
+  --c-saffron: #F59E0B;
+  --c-turquoise: #0891B2;
+  --c-night: #0F0F1E;
+  --c-night-2: #13132A;
+
+  /* Neutral */
+  --c-text: #F1F5F9;
+  --c-text-2: #CBD5E1;
+  --c-text-3: #94A3B8;
+  --c-text-4: #64748B;
+  --c-border: rgba(212, 175, 55, 0.18);
+  --c-border-strong: rgba(212, 175, 55, 0.4);
+  --c-glass: rgba(19, 19, 42, 0.6);
+
+  /* Feedback */
+  --c-success: #10B981;
+  --c-danger: #EF4444;
+  --c-warning: #F59E0B;
+
+  /* Radii & spacing */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+
+  /* Shadows */
+  --shadow-gold: 0 4px 30px rgba(212, 175, 55, 0.18), 0 0 0 1px rgba(212, 175, 55, 0.08);
+  --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.35);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 180ms;
+  --dur-normal: 320ms;
+  --dur-slow: 500ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: 'Inter', 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--c-text);
+  background: var(--c-night);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input,
+textarea {
+  font-family: inherit;
+}
+
+a {
+  color: var(--c-gold);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-in-out);
+}
+
+a:hover {
+  color: var(--c-gold-light);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.25);
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.45);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+/* Utility: screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

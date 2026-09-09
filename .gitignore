@@ -1,0 +1,38 @@
+# Runtime data
+data/session.json
+data/selector-memory.json
+data/logs/
+
+# Legacy folder (old versions, kept for reference)
+legacy/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Reports
+reports/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build + toolchain
+dist/
+build/
+out/
+artifacts/
+.hutch/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.cottontail-tmp/
