@@ -32,13 +32,14 @@ const Controls = (() => {
   function setLaunchReady(launched) {
     if (!els.launchBtn) return;
     if (launched) {
-      els.launchBtn.disabled = true;
+      // Stay clickable: acts as a force-restart for stale sessions
+      els.launchBtn.disabled = false;
       const labelEl = els.launchBtn.querySelector('.btn-label');
       const icon = els.launchBtn.querySelector('.btn-icon');
-      if (labelEl) labelEl.textContent = 'Browser Running';
+      if (labelEl) labelEl.textContent = 'Restart Browser';
       if (icon) {
         icon.classList.remove('spinning');
-        icon.textContent = '✓';
+        icon.textContent = '↻';
       }
     } else {
       els.launchBtn.disabled = false;
