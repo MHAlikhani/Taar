@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Unit & integration tests
+        run: bun test
+
+  build:
+    name: Build smoke (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Cache Electrobun toolchain
+        uses: actions/cache@v4
+        with:
+          path: .hutch
+          key: hutch-${{ runner.os }}-${{ hashFiles('package.json') }}
+
+      - name: Production build
+        run: bunx electrobun build --env=production
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: taar-${{ matrix.os }}
+          path: artifacts/
+          retention-days: 7
