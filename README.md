@@ -1,7 +1,6 @@
 <div align="center">
 
 # Taar · تار
-
 **Weave your network.** Smart, human-like LinkedIn networking automation — built on Bun & Electrobun.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-D4AF37?style=for-the-badge&labelColor=0F0F1E)
@@ -13,9 +12,11 @@
 
 [Features](#-features) · [Quick Start](#-quick-start) · [How It Works](#-how-it-works) · [FAQ](#-faq) · [Contributing](#-contributing)
 
+<img src="./app-screenshot.png">
 </div>
 
 ---
+
 
 **Taar** (Persian: *the warp threads of a carpet*) is a lightweight desktop app that opens an isolated browser, sends connection requests to people-search results on your behalf, and behaves like a careful human while doing it — randomized delays, per-session behavior personas, exponential cooldown when something goes wrong, and a selector engine that learns what works on LinkedIn's changing DOM.
 
