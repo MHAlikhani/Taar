@@ -93,3 +93,15 @@ process.on('exit', () => {
 for (const signal of ['SIGTERM', 'SIGINT'] as const) {
   process.on(signal, () => process.exit(0));
 }
+
+// Bun turns a child-process pipe failure into an uncaught EPIPE that would
+// kill this event loop and freeze the UI. Swallow it — the manager's exit
+// handler resets everything.
+process.on('uncaughtException', (err: any) => {
+  if (err?.code === 'EPIPE') return;
+  console.error('[main] uncaught:', err);
+});
+process.on('unhandledRejection', (reason: any) => {
+  if (reason?.code === 'EPIPE') return;
+  console.error('[main] unhandled rejection:', reason);
+});

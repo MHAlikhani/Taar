@@ -53,6 +53,12 @@ process.on('message', async (msg) => {
   }
 });
 
+setInterval(() => {
+  if (process.send) {
+    try { process.send({ type: 'heartbeat' }); } catch {}
+  }
+}, 30000).unref?.();
+
 process.on('SIGINT', () => shutdown('sigint'));
 process.on('SIGTERM', () => shutdown('sigterm'));
 

@@ -102,3 +102,55 @@ describe('BotProcessManager — bot entrypoint resolution', () => {
     expect(scriptPath.replace(/\\/g, '/')).toMatch(/src\/bot\/index\.js$/);
   });
 });
+
+
+describe('BotProcessManager — stall watchdog (zombie bot recovery)', () => {
+  let uiSend;
+  let manager;
+
+  beforeEach(() => {
+    uiSend = jest.fn();
+    manager = new BotProcessManager(uiSend);
+  });
+
+  afterEach(() => {
+    if (manager._stallTimer) clearInterval(manager._stallTimer);
+  });
+
+  test('fresh bot is not considered stalled', () => {
+    manager.process = { killed: false, kill: () => {} };
+    manager.ready = true;
+    manager.lastSeen = Date.now();
+    manager._checkStall();
+    expect(uiSend).not.toHaveBeenCalled();
+  });
+
+  test('a silent-but-ready bot for 90s+ gets killed and the UI is told', () => {
+    const killSpy = jest.fn();
+    manager.process = { killed: false, kill: killSpy };
+    manager.ready = true;
+    manager.lastSeen = Date.now() - 91000;
+
+    manager._checkStall();
+
+    expect(killSpy).toHaveBeenCalled();
+    expect(uiSend.mock.calls.some((c) => c[0] === 'bot-log' && /responding/i.test(c[1]))).toBe(true);
+  });
+
+  test('a bot that is not ready never triggers the stall kill', () => {
+    manager.process = { killed: false, kill: () => {} };
+    manager.ready = false;
+    manager.lastSeen = Date.now() - 91000;
+
+    manager._checkStall();
+
+    expect(uiSend).not.toHaveBeenCalled();
+  });
+
+  test('any message refreshes lastSeen', () => {
+    manager.process = { killed: false, kill: () => {} };
+    manager.lastSeen = Date.now() - 50000;
+    manager._handleMessage({ type: 'heartbeat' });
+    expect(Date.now() - manager.lastSeen).toBeLessThan(5000);
+  });
+});

@@ -16,6 +16,8 @@ class BotProcessManager {
     this.initResolve = null;
     this.initTimer = null;
     this.ready = false;
+    this.lastSeen = Date.now();
+    this._stallTimer = null;
   }
 
   isRunning() {
@@ -82,6 +84,7 @@ class BotProcessManager {
       this._heartbeatTimer = heartbeatTimer;
 
       this._wireEvents();
+      this._startStallWatch();
 
       this.process.send({ type: 'init' });
     });
@@ -95,6 +98,8 @@ class BotProcessManager {
   }
 
   kill() {
+    clearInterval(this._stallTimer);
+    this._stallTimer = null;
     if (this.process && !this.process.killed) {
       try {
         this.process.kill('SIGTERM');
@@ -112,6 +117,11 @@ class BotProcessManager {
   _wireEvents() {
     const proc = this.process;
 
+    // Without these, a pipe failure surfaces as an uncaught EPIPE
+    proc.stdout.on('error', () => {});
+    proc.stderr.on('error', () => {});
+    proc.on('pipe', () => {});
+
     proc.stdout.on('data', (data) => {
       const text = data.toString().trim();
       if (text) console.log(`[bot:out] ${text}`);
@@ -128,8 +138,22 @@ class BotProcessManager {
     proc.on('exit', (code, signal) => this._handleExit(code, signal));
   }
 
+  _startStallWatch() {
+    clearInterval(this._stallTimer);
+    this._stallTimer = setInterval(() => this._checkStall(), 30000);
+    this._stallTimer.unref?.();
+  }
+
+  _checkStall() {
+    if (!this.isRunning() || !this.ready) return;
+    if (Date.now() - this.lastSeen <= 90000) return;
+    this._send('bot-log', '⚠️ Bot stopped responding — recovering session...');
+    this.kill();
+  }
+
   _handleMessage(msg) {
     if (!msg || typeof msg !== 'object') return;
+    this.lastSeen = Date.now();
 
     switch (msg.type) {
       case 'ready':
@@ -154,6 +178,8 @@ class BotProcessManager {
         break;
       case 'error':
         this._send('bot-error', msg.text);
+        break;
+      case 'heartbeat':
         break;
       case 'browser-closed':
         this._send('bot-log', '🔴 Browser window was closed. Click "Launch Browser" to start a new session.');
